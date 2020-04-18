@@ -81,7 +81,7 @@ $(document).ready(function() {
 
             <!-- Branding Image -->
             <a class="navbar-brand" href="/">
-                hotel management Service
+                Hotel Management Service
             </a>
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
@@ -96,7 +96,7 @@ $(document).ready(function() {
             </ul>
              {% if user.is_authenticated %}
              <ul class="nav navbar-nav">
-                <li><a href="{% url 'hotel:hotels_list' %}">Hotels</a></li>
+
                     <li><a href="{% url 'hotel:viewbookings'%}">View Your Bookings</a></li>
 
             </ul>
