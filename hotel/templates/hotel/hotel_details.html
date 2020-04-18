@@ -1,0 +1,106 @@
+
+{% extends "hotel/base.html" %}
+{% load static %}
+
+{% block title %}
+  {{ Hotels }}
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+    <div class="row">
+        <div class="col-lg-6 col-md-12 col-sm-12">
+                {% with total_items=images|length %}
+                        {% if images|length > 0 %}
+                            Hotel Images:
+            <div id="carousel-demo" class="carousel slide" data-ride="carousel">
+
+                 <div class="carousel-inner" role="listbox">
+                     {% for imageobject in images %}
+                             {% if forloop.counter == 1 %}
+                                 <div class="item active">
+                                {% else %}
+                                 <div class="item">
+                                     {% endif %}
+                                    <div class="thumbnail">
+                                    <a href="{{ imageobject.image.url}} " target="_blank">
+                                         <img src="{% if imageobject.image %} {{ imageobject.image.url }} {% else %} {% static "images/no_image.png"  %} {% endif %}"  style="height: 300px; width: auto">
+                                    </a>
+                                    </div>
+                                </div>
+                        {% endfor %}
+                    </div>
+
+    <!-- Left and right controls -->
+            <a class="left carousel-control" href="#carousel-demo" role="button" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+             </a>
+                <a class="right carousel-control" href="#carousel-demo" role="button" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+        </div>
+    </div>
+                 {% else %}
+                            No Images of Hotel
+
+                            <div class="thumbnail">
+                            <a href="">
+                                <img src=" {% static "images/no_image.png"  %}"  style="height:300px; width: auto">
+                            </a>
+                            </div>
+
+
+                        {% endif %}
+                {% endwith %}
+
+        <div class="column">
+            <p></p>
+            <p style="color:Red;font-weight:bold">Hotel Details:</p>
+                    <p> Hotel Name :{{ hotel.Name }}</p>
+                    <p> Hotel Description:{{ hotel.Description }}</p>
+                    <p>Hotel Amenities: {{ hotel.Amenities }}</p>
+                    <p>Hotel Address:{{ hotel.Address }}</p>
+                    <p>Hotel City:{{ hotel.City }}</p>
+                    <p>Hotel Country:{{ hotel.Country }}</p>
+                    <p>Hotel State :{{ hotel.state }}</p>
+                    <p>Hotel Zipcode:{{ hotel.zipcode }}</p>
+                    <p>Hotel TelephoneNumber: {{ hotel.TelephoneNumber }}</p>
+        </div>
+    </div>
+    </div>
+
+         <h1>Select the room for the below</h1>
+            {% for room in rooms %}
+                <p>
+                <div class="row">
+                    <div class="col-lg-6 col-md-12 col-sm-12">
+                    <div class="thumbnail">
+                            <a href="{ room.image.url }} ">
+                                <img src="{% if room.image %} {{ room.image.url }} {% else %} {% static "images/no_image.png"  %} {% endif %}" alt="..." style="height:300px; width: auto">
+                            </a>
+                     </div>
+                    </div>
+                     </p>
+                    <div class="column">
+                    <p style="font-weight: bold;color: Red"> Room Details:</p>
+                    <p>Room Number:{{ room.RoomNumber }}</p>
+                    <p>Room Type:{{ room.RoomType }}</p>
+                     <p>Room Capacity:{{ room.Capacity }}</p>
+                    <p>Room Bedoption:{{ room.BedOption }}</p>
+                    <p>Room Size:{{ room.RoomSize }}</p>
+                    <p>Room Amenities:{{ room.Amenities }}</p>
+                    <p>Room Price:${{ room.Price }}</p>
+                     <p><a href="{{ room.get_absolute_url }}"
+                           class="btn btn-warning">View Room details</a></p>
+
+                    {% comment %} <p><a href="{% url 'hotel:room_details' hotel_id=room.hotel.id hotel_slug=room.hotel.slug RoomNumber=room.RoomNumber %}"
+                           class="btn btn-warning">View Room details</a></p>{% endcomment %}
+                    </div>
+                </div>
+            {% endfor %}
+
+    </div>
+
+{% endblock %}

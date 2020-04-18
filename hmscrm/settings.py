@@ -20,7 +20,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '@se)_cp-ddfhw6kz9w2jgm$pni=$_h5=28kg4*b^ge!noy*ux4'
+SECRET_KEY = 'zj7mq545rmg(annpqz2un7=yg)r@0-w=9mh_dhy1#zszh$xkts'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'hotel',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -118,8 +119,16 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
-
 STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+LOGIN_REDIRECT_URL = '/home'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'lakshmiprasanna.muppineni26@gmail.com'
+EMAIL_HOST_PASSWORD = 'Prasanna@26'
+DEFAULT_FROM_EMAIL = 'hotelmanagement<noreply@maverick.com>'

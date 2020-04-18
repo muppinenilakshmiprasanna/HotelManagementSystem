@@ -1,0 +1,44 @@
+
+{% extends "hotel/base.html" %}
+{% load static %}
+
+{% block title %}
+  {{ RoomoftheHotel }}
+{% endblock %}
+
+{% block content %}
+  <div class="Container">
+
+
+     <div class="col-md-6" style="padding-left: 20px">
+
+                    <div class="thumbnail">
+                            <a href="">
+                                <img src="{% if room.image %} {{ room.image.url }} {% else %} {% static "images/no_image.png"  %} {% endif %}" alt="..." style="height:300px; width: auto">
+                            </a>
+                     </div>
+
+                  </div>
+                    <div class="column">
+                    <p style="font-weight: bold;color: Red"> Room Details:</p>
+                    <p>Room Number:{{ room.RoomNumber }}</p>
+                    <p>Room Type:{{ room.RoomType }}</p>
+                     <p>Room Capacity:{{ room.Capacity }}</p>
+                    <p>Room Bedoption:{{ room.BedOption }}</p>
+                    <p>Room Size:{{ room.RoomSize }}</p>
+                    <p>Room Amenities:{{ room.Amenities }}</p>
+                    <p>Room Price :${{ room.Price }}</p>
+                     {% comment %}<p><a href="{{ room.get_absolute_url }}"
+                           class="btn btn-warning">View Room details</a></p>{% endcomment %}
+
+                        <p><a href="{% url 'hotel:hotel_details' id=room.hotel.id slug=room.hotel.slug  %}"
+                           class="btn btn-warning">View Hotel details</a></p>
+                         <p><a href="{% url 'hotel:bookroom' hotel_id=room.hotel.id RoomNumber=room.RoomNumber %}" class="btn btn-success">Book Room</a></p>
+                    </div>
+
+
+
+
+
+  </div>
+{% endblock %}

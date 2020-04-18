@@ -1,0 +1,16 @@
+{% extends "hotel/base.html" %}
+
+{% block content %}
+    <div class ="Container">
+    <h1>Search Hotels</h1>
+
+      <form method="POST"  action="" enctype="multipart/form-data" name="search" >
+              {% csrf_token %}
+    <div class="form-group">
+        <label class="form-group-label text-muted" >Enter a Hotel Name, City,Country:</label>
+        <input type="text" placeholder="Search by city,country,hotelname" name="searchitem" style="font-size: 18px;width: 100%"/>
+        <input type="submit" class="btn btn-success" value="SEARCH"/>
+    </div>
+      </form>
+    </div>
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends 'hotel/base.html' %}
+{% load static %}
+{% block content %}
+
+<a class="btn btn-default " href="{% url 'hotel:hotels_list' %}">View Hotels list </a>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3 ">
+
+      <h4>My Bookings:</h4>
+
+
+
+<!-- Loads all of the Current users reservations in a list and displays all  the details -->
+    {% if bookings|length > 0 %}
+      {%for booking in bookings%}
+          {% if   booking.CheckIn|length%}
+
+
+        <a class="btn btn-sm btn-danger pull-right" href="{% url 'hotel:cancelbooking' booking.id %}">Cancel</a>
+          {% endif %}
+          {% comment %}<a  class="btn btn-sm btn-default pull-right "href="{% url 'hotel:gpdf' booking.id %}">Download PDF</a>{% endcomment %}
+        <h5><u>Hotel Name: {{booking.hotel.Name}}</u></h5>
+        <p><mark>Room Type :</mark> {{booking.room.RoomType}}.  </p>
+        <p><mark>Guest Name :</mark>  {{booking.guestFirstName}} {{booking.guestLastName}}.  </p>
+        <p><mark>Check-in Date :</mark> {{booking.CheckIn}}.  </p>
+        <p><mark>Check-out Date:</mark> {{booking.CheckOut}}.  </p>
+        <p><mark>Total Price :</mark> ${{booking.totalPrice}}.  </p>
+
+      {%endfor%}
+
+        {% else %}
+
+                    <p>There are no bookings </p>
+
+        {% endif %}
+
+
+    </div>
+  </div>
+{% endblock %}

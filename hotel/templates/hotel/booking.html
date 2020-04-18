@@ -1,0 +1,28 @@
+{% extends 'hotel/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <h1>Booking A Reservation</h1>
+    <div class="container">
+   {% if messages %}
+<ul style="color:red;font-size: 50px;">
+   {% for message in messages %}
+	   <li>{{ message }}</li>
+   {% endfor %}
+</ul>
+{% endif %}
+
+{% if form.errors %}
+
+    {% for errors in form.errors %}
+        {{ errors }}
+    {% endfor %}
+{% endif %}
+
+    <form method="POST" class="form-group">{% csrf_token %}
+        {% csrf_token %}
+          {{ form|crispy }}
+        <button type="submit"   onclick="check()" class="btn btn-success">Book Now</button>
+    </form>
+     <p><a href="{% url 'hotel:hotels_list' %}">View the hotels list</a></p>
+    </div>
+{% endblock %}
