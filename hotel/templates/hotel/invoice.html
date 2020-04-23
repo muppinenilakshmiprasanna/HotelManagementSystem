@@ -1,0 +1,18 @@
+{% block content %}
+    <div class="container">
+    <h1>Booking Details </a> here. </h1>
+
+    <div class="row">
+    <div class="col-md-6 col-md-offset-3 ">
+        <p>Hotel Name: {{reservation.hotel.Name}}</p>
+        <p>Room Type :{{reservation.room.RoomType}}.  </p>
+      <p>Room Number: {{reservation.room.RoomNumber}}.  </p></p>
+        <p>Guest Name : {{reservation.guestFirstName}} {{booking.guestLastName}}.  </p>
+        <p>Check-in Date :{{reservation.CheckIn}}.  </p>
+        <p>Check-out Date: {{reservation.CheckOut}}.  </p>
+        <p>Total Price : ${{reservation.totalPrice}}.  </p>
+
+    </div>
+    </div>
+    </div>
+{% endblock %}

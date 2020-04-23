@@ -5,7 +5,7 @@ from django.contrib.auth.views import LogoutView, LoginView
 from . import views
 from django.urls import path, re_path
 
-from .views import hotelSearch
+from .views import hotelSearch,GeneratePDF
 
 app_name = 'hotel'
 urlpatterns = [
@@ -22,5 +22,6 @@ urlpatterns = [
     url(r'^mybookings/$', views.mybookings, name='viewbookings'),
     url(r'^mybookings/cancel/(?P<id>[0-9]+)$', views.cancelbooking, name='cancelbooking'),
     url(r'^search$', hotelSearch.as_view(), name='hotelsearch'),
+    url(r'^mybookings/(?P<id>[0-9]+)/pdf$', GeneratePDF.as_view(), name='gpdf'),
 
 ]

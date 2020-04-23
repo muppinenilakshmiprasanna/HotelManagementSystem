@@ -24,9 +24,9 @@ class ImageAdmin(admin.ModelAdmin):
 
 
 class RoomsList(admin.ModelAdmin):
-    list_display = ['RoomNumber','RoomType', 'hotel', 'Capacity','BedOption','RoomSize','Amenities', 'Price', 'is_reserved']
-    list_filter = ['RoomType', 'hotel','Price','is_reserved']
-    list_editable = ['Price','Capacity','is_reserved']
+    list_display = ['RoomNumber','RoomType', 'hotel', 'Capacity','BedOption','RoomSize','Amenities', 'Price']
+    list_filter = ['RoomType', 'hotel','Price',]
+    list_editable = ['Price','Capacity',]
     prepopulated_fields = {'slug': ('RoomNumber',)}
 
 

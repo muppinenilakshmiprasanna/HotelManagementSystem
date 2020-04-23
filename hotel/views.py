@@ -4,11 +4,14 @@ from .forms import *
 from .models import Hotels,Rooms,Images,Reservation
 from django.utils import timezone
 from django.views import View
-from django.template.loader import get_template
+from django.http import HttpResponse
 from django.core.exceptions import ValidationError
 import datetime
 from django.db.models import Q
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+from django.template.loader import get_template
+from .utils import render_to_pdf
 
 # Create your views here.
 now = timezone.now()
@@ -94,8 +97,10 @@ def bookroom(request,hotel_id,RoomNumber):
 
             # if either of these is true, abort and render the error
             if case_1 or case_2 or case_3:
-                return render(request, "hotel/booking.html",{'form': form,'errors': "This room is not available on your selected dates"}
-                              )
+                messages.error(request, 'Room is not available on that dates')
+                return render(request, "hotel/booking.html",
+                              {'form': form})
+
             reservation = form.save(commit=False)
             reservation.user=currentuser
             reservation.hotel=hotel
@@ -109,7 +114,6 @@ def bookroom(request,hotel_id,RoomNumber):
             print("TotalCost", TotalCost)
             reservation.totalPrice=TotalCost
             reservation.created_date = timezone.now()
-            room.is_reserved = True
             reservation.room = room
             reservation.save()
             return render(request, 'hotel/bookingsuccess.html',
@@ -120,15 +124,16 @@ def bookroom(request,hotel_id,RoomNumber):
 
 
 
+
 ## Generates a PDF using the render help function and outputs it as invoice.html
-"""class GeneratePDF(View):
+class GeneratePDF(View):
     def get(self,request, *args, **kwargs):
-        booking = Reservation.objects.get(id= self.kwargs['id'])
+        reservation = Reservation.objects.get(id= self.kwargs['id'])
         template = get_template('hotel/invoice.html')
-        context = {"booking":booking}
+        context = {"reservation":reservation}
         html = template.render(context)
-        pdf = render_to_pdf('invoice.html', context)
-        return HttpResponse(pdf,content_type='application/pdf')"""
+        pdf = render_to_pdf('hotel/invoice.html', context)
+        return HttpResponse(pdf,content_type='application/pdf')
 
 class hotelSearch(View):
     def get(self,request):
