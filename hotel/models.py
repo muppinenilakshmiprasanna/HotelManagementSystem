@@ -80,28 +80,6 @@ class Rooms(models.Model):
         return reverse('hotel:room_details', args=[self.hotel.id,self.hotel.slug,self.RoomNumber])
 
 
-class Review(models.Model):
-    user = models.ForeignKey(User,on_delete=models.CASCADE)
-    hotel = models.ForeignKey(Hotels,on_delete=models.CASCADE)
-    comment = models.CharField(max_length  = 255)
-    created_date = models.DateTimeField(default=timezone.now)
-    updated_date = models.DateTimeField(auto_now_add=True)
-    rating = models.IntegerField(default = 0)
-
-    class Meta:
-        verbose_name = 'Review'
-        verbose_name_plural = 'Reviews'
-
-    def __str__(self):
-         return self.comment
-
-    def created(self):
-        self.created_date = timezone.now()
-        self.save()
-
-    def updated(self):
-        self.updated_date = timezone.now()
-        self.save()
 
 #Create a Reservation Model which stores booking details
 
