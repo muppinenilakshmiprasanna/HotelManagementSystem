@@ -23,5 +23,6 @@ urlpatterns = [
     url(r'^mybookings/cancel/(?P<id>[0-9]+)$', views.cancelbooking, name='cancelbooking'),
     url(r'^search$', hotelSearch.as_view(), name='hotelsearch'),
     url(r'^mybookings/(?P<id>[0-9]+)/pdf$', GeneratePDF.as_view(), name='gpdf'),
+    
 
 ]

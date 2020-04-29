@@ -21,7 +21,7 @@ class Booking(forms.ModelForm):
         model = Reservation
         fields = ('guestFirstName', 'guestLastName', 'email', 'phonenumber', 'CheckIn', 'CheckOut',)
         widgets = {
-        'CheckIn': forms.DateInput(attrs={'class': 'datepicker','data-min': datetime.date, }),
+        'CheckIn': forms.DateInput(attrs={'class': 'datepicker' }),
         'CheckOut': forms.DateInput(attrs={'class': 'datepicker'})
         }
 

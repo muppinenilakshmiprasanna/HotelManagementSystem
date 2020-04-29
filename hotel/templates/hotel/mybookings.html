@@ -1,6 +1,7 @@
 {% extends 'hotel/base.html' %}
 {% load static %}
 {% block content %}
+
 {% if messages %}
 <ul style="color:red;font-size: 50px;">
    {% for message in messages %}
@@ -10,20 +11,6 @@
 {% endif %}
 
 
-{% if form.errors %}
-    {% for field in form %}
-        {% for error in field.errors %}
-            <div class="alert alert-danger">
-                {{ field.label }} <strong>{{ error|escape }}</strong>
-            </div>
-        {% endfor %}
-    {% endfor %}
-    {% for error in form.non_field_errors %}
-        <div class="alert alert-danger">
-            {{ field.label }} <strong>{{ error|escape }}</strong>
-        </div>
-    {% endfor %}
-{% endif %}
 
 
 <div class="row">
@@ -37,18 +24,19 @@
 <!-- Loads all of the Current users reservations in a list and displays all  the details -->
     {% if bookings|length > 0 %}
       {%for booking in bookings%}
-
-
-
+          {% if booking.CheckIn > now.date %}
         <a class="btn btn-sm btn-danger pull-right" href="{% url 'hotel:cancelbooking' booking.id %}">Cancel</a>
-
         <a  class="btn btn-sm btn-default pull-right "href="{% url 'hotel:gpdf' booking.id %}">Download PDF</a>
+        {% endif %}
+
         <p>Hotel Name: {{booking.hotel.Name}}</p>
-        <p>Room Type :</mark> {{booking.room.RoomType}}.  </p>
-        <p>Guest Name :</mark>  {{booking.guestFirstName}} {{booking.guestLastName}}.  </p>
-        <p>Check-in Date :</mark> {{booking.CheckIn}}.  </p>
-        <p>Check-out Date:</mark> {{booking.CheckOut}}.  </p>
-        <p>Total Price :</mark> ${{booking.totalPrice}}.  </p>
+          <p>Room Number: {{booking.room.RoomNumber}}</p>
+        <p>Room Type :{{booking.room.RoomType}}  </p>
+        <p>Guest Name :{{booking.guestFirstName}} {{booking.guestLastName}}  </p>
+        <p>Check-in Date : {{booking.CheckIn}}  </p>
+        <p>Check-out Date: {{booking.CheckOut}} </p>
+        <p>Total Price : ${{booking.totalPrice}} </p>
+
           <br>
           <br>
 

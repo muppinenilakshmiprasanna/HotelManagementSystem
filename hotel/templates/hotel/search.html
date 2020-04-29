@@ -7,10 +7,20 @@
       <form method="POST"  action="" enctype="multipart/form-data" name="search" >
               {% csrf_token %}
     <div class="form-group">
-        <label class="form-group-label text-muted" >Enter a Hotel Name, City,Country:</label>
-        <input type="text" placeholder="Search by city,country,hotelname" name="searchitem" style="font-size: 18px;width: 100%"/>
+        <label class="form-group-label text-muted" >Search by Hotel Name,State, City,Country:</label>
+        <input type="text" placeholder="Search by city,country,hotelname" name="searchitem"  class="form-control" style="font-size: 18px;"/>
+        <br/>
         <input type="submit" class="btn btn-success" value="SEARCH"/>
     </div>
       </form>
     </div>
+
+    {% if messages %}
+<ul style="color:red;font-size: 50px;">
+   {% for message in messages %}
+	   <li>{{ message }}</li>
+   {% endfor %}
+</ul>
+{% endif %}
+
 {% endblock %}

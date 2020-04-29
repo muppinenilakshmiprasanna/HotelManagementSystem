@@ -62,7 +62,7 @@ def room_details(request, hotel_id, hotel_slug,RoomNumber,):
 #Shows the user thier previous bookings.
 def mybookings(request):
     bookings = Reservation.objects.filter(user = request.user)
-    return render(request, 'hotel/mybookings.html', {'bookings':bookings})
+    return render(request, 'hotel/mybookings.html', {'bookings':bookings,'now': datetime.datetime.now()})
 
 
 # Allows a user to cancel their previous bookings , deleting a booking onclick.
@@ -140,10 +140,17 @@ class hotelSearch(View):
         return render(request, 'hotel/search.html')
     def post(self,request):
         print("Searchterm entered post ")
-        Searchterm = request.POST.get("searchitem").title()
-        print("Searchterm ")
+        #Searchterm = request.POST.get("searchitem")
+        Searchterm=request.POST['searchitem']
+        print("Searchterm",Searchterm)
         if Searchterm:
-            hotels_list = Hotels.objects.filter(Q(City__contains=Searchterm) | Q(Country__contains=Searchterm)
-            | Q(state__contains=Searchterm)| Q(Name__contains=Searchterm))
-        context = {'hotels':hotels_list}
-        return render(request, 'hotel/hotels_list.html', context)
+            hotels_list = Hotels.objects.filter(Q(City__icontains=Searchterm) | Q(Country__icontains=Searchterm)
+            | Q(state__contains=Searchterm)| Q(Name__icontains=Searchterm))
+            print("hotels_list",hotels_list)
+            if hotels_list:
+                context = {'hotels': hotels_list}
+                return render(request, 'hotel/hotels_list.html', context)
+            else:
+                messages.error(request,'No results found')
+        else:
+            return render(request, 'hotel/search.html')
