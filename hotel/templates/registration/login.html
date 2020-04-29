@@ -1,6 +1,8 @@
 {% extends "hotel/base.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
+     <div class="container">
+        <div class="col-lg-6">
     {% if form.errors %}
     <br />
     <p>Your username and password didn't match. Please try again.</p>
@@ -16,6 +18,8 @@
           </form>
             <br/>
         <p><a href="{% url 'password_reset' %}">Forgotten your  password?</a></p>
+        </div>
+     </div>
 
 {% endblock %}
 
