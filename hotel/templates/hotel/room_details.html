@@ -13,7 +13,11 @@
      <div class="col-md-6" style="padding-left: 20px">
 
                     <div class="thumbnail">
-                            <a href="">
+                        {% if room.image %}
+                            <a href="{{ room.image.url}} " target="_blank">
+                             {% else %}
+                             <a href="{% static "images/no_image.png"  %}" target="_blank">
+                            {% endif %}
                                 <img src="{% if room.image %} {{ room.image.url }} {% else %} {% static "images/no_image.png"  %} {% endif %}" alt="..." style="height:300px; width: auto">
                             </a>
                      </div>

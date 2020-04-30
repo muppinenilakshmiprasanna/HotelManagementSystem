@@ -46,8 +46,8 @@
                             No Images of Hotel
 
                             <div class="thumbnail">
-                            <a href="">
-                                <img src=" {% static "images/no_image.png"  %}"  style="height:300px; width: auto">
+                            <a href="{% static "images/no_image.png"  %}" target="_blank">
+                                <img src=" {% static "images/no_image.png"  %}"  style="height:300px; width: 300px">
                             </a>
                             </div>
 
@@ -77,9 +77,14 @@
                 <div class="row">
                     <div class="col-lg-6 col-md-12 col-sm-12">
                     <div class="thumbnail">
-                            <a href="{ room.image.url }} ">
+                           {% if room.image %}
+                            <a href="{{ room.image.url}} " target="_blank">
+                             {% else %}
+                             <a href="{% static "images/no_image.png"  %}" target="_blank">
+                            {% endif %}
                                 <img src="{% if room.image %} {{ room.image.url }} {% else %} {% static "images/no_image.png"  %} {% endif %}" alt="..." style="height:300px; width: auto">
                             </a>
+
                      </div>
                     </div>
                      </p>
