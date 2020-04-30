@@ -152,5 +152,4 @@ class hotelSearch(View):
                 return render(request, 'hotel/hotels_list.html', context)
             else:
                 messages.error(request,'No results found')
-        else:
-            return render(request, 'hotel/search.html')
+        return render(request, 'hotel/search.html')
